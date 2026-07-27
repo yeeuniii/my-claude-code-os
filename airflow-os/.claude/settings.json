@@ -6,7 +6,18 @@
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PROJECT_DIR}/.claude/tests/check-injection.sh --hook"
+            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/check-injection.sh --hook"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/os-reminder.sh"
           }
         ]
       }

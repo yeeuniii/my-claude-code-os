@@ -22,7 +22,7 @@
 #
 # 새 세션 테스트 흐름(수동):
 #   1) 서브에이전트를 실제로 돌린다 (예: dag-reviewer로 DAG 하나 리뷰)
-#   2) .claude/tests/check-injection.sh --agent dag-reviewer
+#   2) .claude/hooks/check-injection.sh --agent dag-reviewer
 
 set -uo pipefail
 

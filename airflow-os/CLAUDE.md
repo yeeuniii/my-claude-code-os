@@ -9,6 +9,7 @@
 	- 리팩터·개선·리뷰 → dag-audit
 	- 신규 → interview
 	- 전 과정 → airflow-pipeline
+- OS 자산(.claude·OS.md·CLAUDE.md·learnings) 수정은 파일부터 열지 말고 → os
 - OS 전체 설계·파이프라인 구조는 OS.md 참고.
 
 ## 작성 규칙 (컨텍스트·스킬·서브에이전트)

@@ -8,7 +8,7 @@
 
 set -uo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
-SUT="$HERE/check-injection.sh"
+SUT="$HERE/../hooks/check-injection.sh"
 TMP="$(mktemp -d)"; trap 'rm -rf "$TMP"' EXIT
 
 pass=0; fail=0
