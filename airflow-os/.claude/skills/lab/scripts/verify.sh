@@ -11,7 +11,12 @@ TARGET="$1"
 
 cd "$(dirname "$0")/../../../.."  # airflow-os 루트로 이동
 
-AIRFLOW_REPO="$PWD/prod-airflow"  # 운영 레포 심링크 (setup.sh가 생성, .gitignore로 커밋 제외)
+AIRFLOW_REPO=/Users/yepark/Project/airflow.datawave.co.kr
+if [ ! -d "$AIRFLOW_REPO" ]; then
+    echo "운영 레포를 찾을 수 없음: $AIRFLOW_REPO" >&2
+    echo "경로가 바뀌었으면 .claude/context/workspace.md의 '코드 위치'를 따라 함께 갱신할 것." >&2
+    exit 1
+fi
 
 export AIRFLOW_HOME="$PWD/.airflow"
 export AIRFLOW__CORE__LOAD_EXAMPLES=false

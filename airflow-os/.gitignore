@@ -1,7 +1,6 @@
 .venv/
 .airflow/
 __pycache__/
-prod-airflow
 *.swp
 *.swo
 .claude/scheduled_tasks.lock

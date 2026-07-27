@@ -1,8 +1,8 @@
 # airflow-os
 
 ## 코드 위치
-- 실제 운영 DAG는 `prod-airflow/dags/` (심링크 → ops repo). 구현·테스트 위치 규칙은 `.claude/context/workspace.md` 참고.
-- Glob/Grep은 심링크를 기본으로 안 따라감 → `find -L prod-airflow/dags -name "*.py"`로 찾거나 경로를 직접 Read.
+- 실제 운영 DAG는 운영 레포 `/Users/yepark/Project/airflow.datawave.co.kr/`의 `dags/`. `.claude/settings.json`의 `additionalDirectories`로 등록돼 있어 Glob/Grep/Read가 그대로 동작한다.
+- 구현·테스트 위치 규칙은 `.claude/context/workspace.md` 참고.
 
 ## 작업 라우팅
 - DAG 작업은 파일부터 열지 말고 스킬로 라우팅: 

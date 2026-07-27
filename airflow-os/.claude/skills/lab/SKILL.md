@@ -12,9 +12,9 @@ description: Airflow 3.2.2 로컬 테스트 환경(venv)을 구축·검증·유�
 
 ## 환경 정보
 
-- 운영 Airflow 레포: `prod-airflow/` (운영 레포로 향하는 심링크 — 실제 절대경로는 `setup.sh`의 `PROD_AIRFLOW_REPO` 한 곳에만 있고, 심링크는 `.gitignore`로 커밋 제외)
+- 운영 Airflow 레포: 경로는 `.claude/context/workspace.md`의 '코드 위치' 참고 (`verify.sh`가 같은 경로를 PYTHONPATH로 잡는다)
 - venv: `airflow-os/.venv` / AIRFLOW_HOME: `airflow-os/.airflow` (SQLite, 운영 DB에 붙지 않음)
-- DAG 소스: `prod-airflow/dags/`를 경로로 참조 (심링크라 항상 운영 실시간, 복사하지 않음)
+- DAG 소스: 운영 레포의 `dags/`를 경로로 직접 참조 (항상 운영 실시간, 복사하지 않음)
 
 ## 구축 / 재구축
 
@@ -29,6 +29,8 @@ bash .claude/skills/lab/scripts/setup.sh   # Airflow 코어만 설치
 ```bash
 bash .claude/skills/lab/scripts/verify.sh <DAG 파일|폴더>   # 2~3초
 ```
+
+타깃은 **운영 레포의 절대경로**로 준다.
 
 - **성공 기준: import error 0건.**
 - 에러가 나면 원인 별 대응:

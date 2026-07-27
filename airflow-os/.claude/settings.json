@@ -1,4 +1,9 @@
 {
+  "permissions": {
+    "additionalDirectories": [
+      "/Users/yepark/Project/airflow.datawave.co.kr"
+    ]
+  },
   "hooks": {
     "SubagentStop": [
       {
