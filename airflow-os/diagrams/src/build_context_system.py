@@ -39,8 +39,9 @@ CARDS = {
     "pipe":  dict(col="skills", cy=398, title="airflow-pipeline",
                   sub="오케스트레이터 · 설계→구현→테스트→리뷰 루프", tint=PURPLE),
     "lab":   dict(col="skills", cy=490, title="lab", sub="로컬 Airflow 3.2 검증 env"),
-    "meta":  dict(col="skills", cy=580, title="OS 유지 스킬",
-                  sub="lint · sync · retrospective · diagram"),
+    "meta":  dict(col="skills", cy=580, h=88, title="OS 유지 스킬",
+                  sub="os(변경 게이트)",
+                  sub2="lint · sync · retrospective · diagram"),
     # 워커 — pipeline(398) 기준 대칭
     "build": dict(col="workers", cy=318, title="dag-builder", sub="구현 — 설계도를 코드로"),
     "test":  dict(col="workers", cy=398, title="dag-tester", sub="파싱·구조 검증"),
@@ -176,7 +177,7 @@ def build():
         '<span class="bdg cond">R</span>&nbsp;테두리 = 조건부 주입(검증 모드에서만)'
     ) % (PURPLE, SLATE)
     parts.append(f'<div class="legend">{legend}</div>')
-    parts.append('<div class="stamp">기준 2026-07-15 · .claude/ 로컬 자산 · 참조 관계 실측</div>')
+    parts.append('<div class="stamp">기준 2026-07-27 · .claude/ 로컬 자산 · 참조 관계 실측</div>')
 
     parts.append("</div></div>")
     return TEMPLATE.replace("__BODY__", "".join(parts))

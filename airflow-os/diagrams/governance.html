@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#eef1f5; font-family:-apple-system,'Helvetica Neue','Apple SD Gothic Neo',sans-serif; }
+.page { padding:40px; display:inline-block; }
+.sheet { position:relative; background:#fff; border-radius:24px;
+  box-shadow:0 12px 40px rgba(30,40,60,.10); }
+.head { position:absolute; left:40px; top:34px; right:40px; }
+.h1 { font-size:29px; font-weight:700; color:#1e2633; letter-spacing:-.2px; }
+.h2 { font-size:13.5px; color:#6b7686; margin-top:8px; line-height:1.55; max-width:1240px; }
+.h2 b { color:#3a4557; font-weight:600; } .h2 code { color:#7c6bb0; font-size:12.5px; }
+.rule { height:1px; background:#e9ecf2; margin-top:16px; }
+.panel { position:absolute; border-radius:16px; }
+.ptitle { position:absolute; left:18px; top:14px; font-size:11.5px; font-weight:700;
+  letter-spacing:1.2px; color:#7a8496; text-transform:uppercase; display:flex; align-items:center; }
+.dot { width:9px; height:9px; border-radius:50%; display:inline-block; margin-right:8px; }
+.edges { position:absolute; left:0; top:0; pointer-events:none; }
+.card { position:absolute; border-radius:12px; border:1px solid #e6e8ee;
+  box-shadow:0 2px 6px rgba(30,40,60,.05); padding:13px 16px; }
+.ct { font-size:15px; font-weight:600; color:#232b38; display:flex; align-items:center; }
+.cs { font-size:11.5px; color:#8b93a3; margin-top:6px; line-height:1.4; }
+.legend { position:absolute; left:40px; bottom:28px; font-size:11.5px; color:#6b7686;
+  display:flex; align-items:center; }
+.legend b { color:#3a4557; font-weight:600; }
+.legend .sw { width:14px; height:14px; border-radius:4px; border:1px solid #ccc;
+  display:inline-block; margin-right:7px; }
+.legend .ln { width:22px; height:0; border-top:1.6px solid #aab2be; display:inline-block; margin-right:7px; }
+.legend .gap { display:inline-block; width:22px; }
+.stamp { position:absolute; right:40px; bottom:28px; font-size:11px; color:#a7b0be; }
+</style></head><body><div class="page"><div class="sheet" style="width:1420px;height:560px"><div class="head"><div class="h1">airflow-os 자기거버넌스 — 자산 변경 게이트</div><div class="h2">OS 자산을 고치면 리마인더 훅이 게이트를 <b>상기</b>(비블로킹)한다. <code>os</code>가 sync·lint로 점검(리포트만)하고, 사람 <b>승인</b> 한 번이 편집·수정을 함께 반영한다.</div><div class="rule"></div></div><div class="panel" style="left:40px;top:150px;width:210px;height:340px;background:#f7f8fb"><div class="ptitle"><span class="dot" style="background:#64748b"></span>편집</div></div><div class="panel" style="left:280px;top:150px;width:250px;height:340px;background:#f7f8fb"><div class="ptitle"><span class="dot" style="background:#0ea5e9"></span>훅</div></div><div class="panel" style="left:560px;top:150px;width:200px;height:340px;background:#f7f8fb"><div class="ptitle"><span class="dot" style="background:#8b5cf6"></span>게이트</div></div><div class="panel" style="left:800px;top:150px;width:300px;height:340px;background:#f7f8fb"><div class="ptitle"><span class="dot" style="background:#3b82f6"></span>점검</div></div><div class="panel" style="left:1130px;top:150px;width:250px;height:340px;background:#f7f8fb"><div class="ptitle"><span class="dot" style="background:#64748b"></span>승인</div></div><svg class="edges" width="1420" height="560"><defs><marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#aab2be"/></marker></defs><path d="M 230.0 310.0 L 246.0 310.0 L 284.0 310.0 L 300.0 310.0" fill="none" stroke="#aab2be" stroke-width="1.4" stroke-linejoin="round" marker-end="url(#arw)"/><path d="M 510.0 310.0 L 526.0 310.0 L 564.0 310.0 L 580.0 310.0" fill="none" stroke="#aab2be" stroke-width="1.4" stroke-linejoin="round" marker-end="url(#arw)"/><path d="M 740.0 310.0 L 756.0 310.0 L 804.0 225.0 L 820.0 225.0" fill="none" stroke="#aab2be" stroke-width="1.4" stroke-linejoin="round" marker-end="url(#arw)"/><path d="M 740.0 310.0 L 756.0 310.0 L 804.0 310.0 L 820.0 310.0" fill="none" stroke="#aab2be" stroke-width="1.4" stroke-linejoin="round" marker-end="url(#arw)"/><path d="M 740.0 310.0 L 756.0 310.0 L 804.0 395.0 L 820.0 395.0" fill="none" stroke="#aab2be" stroke-width="1.4" stroke-linejoin="round" marker-end="url(#arw)"/></svg><div class="card" style="left:60.0px;top:273.0px;width:170px;height:74px;background:#eef1f6"><div class="ct">OS 자산 편집</div><div class="cs">Edit · Write · MultiEdit</div></div><div class="card" style="left:300.0px;top:266.0px;width:210px;height:88px;background:#ffffff"><div class="ct">리마인더 훅</div><div class="cs">os-reminder.sh · PostToolUse<br>편집 감지 → 게이트 상기 · 비블로킹</div></div><div class="card" style="left:580.0px;top:266.0px;width:160px;height:88px;background:#f4f0fd"><div class="ct">os</div><div class="cs">변경 게이트<br>오케스트레이터</div></div><div class="card" style="left:820.0px;top:188.0px;width:260px;height:74px;background:#ffffff"><div class="ct">sync</div><div class="cs">정합성 — 참조처 드리프트</div></div><div class="card" style="left:820.0px;top:273.0px;width:260px;height:74px;background:#ffffff"><div class="ct">lint</div><div class="cs">작성 규칙</div></div><div class="card" style="left:820.0px;top:358.0px;width:260px;height:74px;background:#ffffff"><div class="ct">retrospective</div><div class="cs">기록 — 구조 변경 시</div></div><div class="card" style="left:1150.0px;top:266.0px;width:210px;height:88px;background:#eef1f6"><div class="ct">사람 승인</div><div class="cs">유일한 수동 게이트<br>편집·점검 수정 한 번에 반영</div></div><div class="legend"><span class="sw" style="background:#f4f0fd;border-color:#d9cffa"></span>오케스트레이터<span class="gap"></span><span class="sw" style="background:#eef1f6;border-color:#d5dbe6"></span>사람 게이트<span class="gap"></span><span class="ln"></span>흐름<span class="gap"></span>훅은&nbsp;<b>비블로킹</b>&nbsp;— 막지 않고 상기만</div><div class="stamp">기준 2026-07-27 · .claude/ 로컬 자산</div></div></div></body></html>
