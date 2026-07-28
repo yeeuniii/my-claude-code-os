@@ -38,7 +38,7 @@ CARDS = {
     "intv":  dict(col="skills", cy=312, title="interview", sub="신규 — 질문으로 설계도 합의"),
     "pipe":  dict(col="skills", cy=398, title="airflow-pipeline",
                   sub="오케스트레이터 · 설계→구현→테스트→리뷰 루프", tint=PURPLE),
-    "lab":   dict(col="skills", cy=490, title="lab", sub="로컬 Airflow 3.2 검증 env"),
+    "lab":   dict(col="skills", cy=490, title="lab", sub="로컬 Airflow 검증 env"),
     "meta":  dict(col="skills", cy=580, h=88, title="OS 유지 스킬",
                   sub="os(변경 게이트)",
                   sub2="lint · sync · retrospective · diagram"),

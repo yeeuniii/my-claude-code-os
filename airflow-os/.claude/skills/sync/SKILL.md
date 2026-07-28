@@ -28,7 +28,7 @@ description: 작업 산출물(OS.md·서브에이전트·learnings)과 스킬 �
 
 ## 흐름
 
-1. **범위 확인** — 기본은 `airflow-os` 전체(OS.md, `CLAUDE.md`, `.claude/skills/*`, `.claude/agents/*`, `.claude/hooks/*`, `.claude/tests/*`, `.claude/settings.json`, `learnings/`). 사용자가 특정 스킬/축만 원하면 좁힌다.
+1. **범위 확인** — 기본은 `airflow-os` 전체(OS.md, `CLAUDE.md`, `.claude/skills/*`, `.claude/agents/*`, `.claude/context/*`, `.claude/hooks/*`, `.claude/tests/*`, `.claude/settings.json`, `learnings/`, `designs/`). 사용자가 특정 스킬/축만 원하면 좁힌다.
 2. **격리된 대조 패스** — `general-purpose` 서브에이전트로 대조를 돌린다. 이 스킬을 부른 메인 컨텍스트의 가정을 그대로 들고 가면 "당연히 맞겠지"로 놓치므로, **분리된 눈**으로 위 5개 축을 훑게 한다. 서브에이전트에는 이 축 목록과 "각 발견마다 두 파일의 실제 문구를 인용하라"를 전달한다.
 3. **정리해 보고** — 반환된 발견을 심각도 순으로 리포트(아래 형식). 어긋난 데가 없으면 "드리프트 없음"이라고 명시.
 4. **수정 제안** — 발견마다 "어느 파일을, 어느 방향으로" 고치면 되는지 구체적으로 제시한다. **적용은 사람이 승인**한 뒤에만 한다(이 스킬은 제안까지).

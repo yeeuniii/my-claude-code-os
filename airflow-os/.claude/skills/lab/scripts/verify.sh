@@ -20,7 +20,9 @@ fi
 
 export AIRFLOW_HOME="$PWD/.airflow"
 export AIRFLOW__CORE__LOAD_EXAMPLES=false
-export AIRFLOW__CORE__UNIT_TEST_MODE=true
+# UNIT_TEST_MODE는 켜지 않는다 — unit_tests.cfg가 로드되면서
+# scheduler.create_cron_data_intervals가 True로 뒤집혀 cron DAG의 timetable이 운영과 달라진다
+# (운영 기본값 False = CronTriggerTimetable, logical_date가 트리거 시각).
 # docker-compose.yml의 PYTHONPATH 대응 (config:dags:plugins)
 export PYTHONPATH="${AIRFLOW_REPO}/config:${AIRFLOW_REPO}/dags:${AIRFLOW_REPO}/plugins"
 # 로컬 더미 Variables 주입 (모듈 최상단 Variable.get() 대응)
@@ -31,7 +33,7 @@ import sys
 from airflow.dag_processing.dagbag import DagBag
 
 dag_folder = sys.argv[1]
-db = DagBag(dag_folder=dag_folder, include_examples=False)
+db = DagBag(dag_folder=dag_folder)
 
 print(f"\nDAG {len(db.dags)}개 로드됨")
 if db.import_errors:

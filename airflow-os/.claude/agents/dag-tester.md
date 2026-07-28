@@ -15,10 +15,10 @@ tools: Read, Write, Edit, Bash, Grep, Glob
 
 ## 입력 계약
 - 방금 구현된 DAG 파일 경로
-- **설계도 파일 `designs/<dag_id>.md`** — Read해서 task 목록·의존성을 얻는다. 이게 **구조 일치 검증의 정답지**다. (오케스트레이터가 경로를 준다. 없이 호출되면 대상 DAG의 dag_id로 `designs/`에서 찾는다.)
+- **`designs/`의 설계도 파일** — Read해서 task 목록·의존성을 얻는다. 이게 **구조 일치 검증의 정답지**다. 경로 규칙은 `.claude/context/dag-design-spec.md` 기준. (오케스트레이터가 경로를 준다. 없이 호출되면 대상 dag_id로 **시작하는** 파일을 `designs/`에서 찾고, 여러 개면 어느 것이 이번 정답지인지 호출자에게 확인한다.)
 
 ## 테스트 환경 (lab 인프라 사용)
-이 프로젝트엔 운영과 동일한 Airflow 3.2.2 로컬 venv가 `lab` 스킬로 준비돼 있다. 너는 스킬을 직접 호출할 수 없으므로(격리) **그 스크립트/문서를 파일 경로로 직접 쓴다**:
+이 프로젝트엔 운영과 동일 버전의 Airflow 로컬 venv가 `lab` 스킬로 준비돼 있다. 너는 스킬을 직접 호출할 수 없으므로(격리) **그 스크립트/문서를 파일 경로로 직접 쓴다**:
 - 파싱 검증: `bash .claude/skills/lab/scripts/verify.sh <DAG 파일|폴더>`
 - pytest: `.venv/bin/python -m pytest ...`
 - 규칙 참고: `.claude/skills/lab/SKILL.md`를 Read로 읽어 따른다.

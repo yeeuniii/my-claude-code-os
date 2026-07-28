@@ -1,12 +1,14 @@
 ---
 name: lab
-description: Airflow 3.2.2 로컬 테스트 환경(venv)을 구축·검증·유지보수하는 인프라 스킬. 사용자가 "로컬 환경 구축/재구축", "환경 검증", "DAG 파싱 테스트", "패키지/더미 값 추가"를 요청하거나, DAG 테스트 중 import 에러가 환경 문제로 의심될 때 사용.
+description: Airflow 로컬 테스트 환경(venv)을 구축·검증·유지보수하는 인프라 스킬. 사용자가 "로컬 환경 구축/재구축", "환경 검증", "DAG 파싱 테스트", "패키지/더미 값 추가"를 요청하거나, 운영 Airflow 버전이 올라가 로컬을 맞춰야 하거나, DAG 테스트 중 import 에러가 환경 문제로 의심될 때 사용.
 ---
 
 # Airflow Local Test Environment
 
-운영 서버와 동일한 **Airflow 3.2.2 / Python 3.12** 로컬 venv 환경.
+**운영 서버와 동일 버전**의 Airflow 로컬 venv 환경.
 도커 없이 DAG 파싱 검증·pytest 단위 테스트까지 커버한다.
+
+버전은 운영 레포 `Dockerfile`의 베이스 이미지를 따르며, 실제 설치 값은 `scripts/setup.sh`의 `AIRFLOW_VERSION`·`PYTHON_VERSION`에 있다. **버전이 적힌 곳은 거기 한 곳이다** — 운영이 올라가면 그 두 값만 바꾸고 재구축한다.
 
 **철학: 최소 세팅 + 점진 추가.** 기본은 Airflow 코어뿐이고, provider·라이브러리·더미 Variable/Connection은 **작업하는 DAG가 필요로 할 때 그때그때 추가**한다. 운영 DAG 전체를 로컬에서 파싱 가능하게 만드는 것은 목표가 아니다.
 
@@ -41,13 +43,14 @@ bash .claude/skills/lab/scripts/verify.sh <DAG 파일|폴더>   # 2~3초
 ## 패키지 추가
 
 ```bash
-# airflow 생태계 패키지는 반드시 constraint 적용
+# airflow 생태계 패키지는 반드시 constraint 적용. 버전은 setup.sh에서 읽어 쓴다.
+eval "$(grep -E '^(AIRFLOW|PYTHON)_VERSION=' .claude/skills/lab/scripts/setup.sh)"
 uv pip install --python .venv/bin/python \
-  --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-3.2.2/constraints-3.12.txt" \
+  --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt" \
   <package>
 ```
 
-추가했으면 **setup.sh에도 한 줄 반영** (재구축 시 유실 방지). 버전은 운영 Airflow 레포의 `Dockerfile`에 명시된 것이 있으면 그걸 따른다.
+추가했으면 **setup.sh에도 한 줄 반영** (재구축 시 유실 방지).
 
 ## 더미 값 추가 (Variable / Connection)
 

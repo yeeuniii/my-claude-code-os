@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
-# Airflow 3.2.2 로컬 테스트 환경 구축 (운영 서버와 동일: Airflow 3.2.2 / Python 3.12)
+# Airflow 로컬 테스트 환경 구축 (운영 서버와 동일 버전)
 # 철학: 최소 설치. provider·라이브러리는 작업할 DAG가 필요로 할 때 그때그때 추가한다.
+#
+# 버전은 운영 레포의 Dockerfile(`FROM apache/airflow:<버전>-python<파이썬>`)을 따른다.
+# 운영이 올라가면 아래 두 값을 그에 맞춰 바꾸고 이 스크립트를 다시 돌린다.
 set -euo pipefail
 
 cd "$(dirname "$0")/../../../.."  # airflow-os 루트로 이동
 
-AIRFLOW_VERSION=3.2.2
+AIRFLOW_VERSION=3.3.0
 PYTHON_VERSION=3.12
 CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
 
