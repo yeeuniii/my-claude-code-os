@@ -10,6 +10,9 @@ __pycache__/
 .claude/context/conventions/airbyte.md
 .claude/context/platform.md
 
+# 설계도 — 실제 테이블 스키마·실측 수치·업무 협의 내용이 들어가 git 안 올림
+designs/
+
 # A/B 재료(fixture) — 회사 컨벤션이 드러나 git 안 올림 (방법론 protocol/design은 올림)
 ab/answer-key.md
 ab/sample-dag.py
