@@ -27,4 +27,8 @@ echo "── 4. DAG별 추가 패키지 (작업하며 그때그때 추가된 것
 uv pip install --python .venv/bin/python --constraint "${CONSTRAINT_URL}" \
     gspread apache-airflow-providers-google
 
+# LLM enrichment DAG: openai provider(OpenAIHook), Doris 적재(MySqlHook)
+uv pip install --python .venv/bin/python --constraint "${CONSTRAINT_URL}" \
+    apache-airflow-providers-openai apache-airflow-providers-mysql
+
 echo "── 완료. 패키지 추가는 SKILL.md의 '패키지 추가' 절 참고."
