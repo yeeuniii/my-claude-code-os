@@ -5,6 +5,9 @@
 - 이 경로는 `.claude/settings.json`의 `additionalDirectories`로 워크스페이스에 등록돼 있어 Glob/Grep/Read가 그대로 동작한다.
 - 레포가 이동하면 여기·`CLAUDE.md`·`.claude/settings.json`·`.claude/skills/lab/scripts/verify.sh`를 함께 고친다.
 
+## 설계도 위치
+- DAG 설계도는 운영 레포 `designs/`에 둔다. 이 OS 레포에는 두지 않는다.
+
 ## 구현 위치
 - 새 DAG·수정은 운영 레포 `dags/<서브경로>/`에 쓴다. 서브경로·네이밍·구조는 그 폴더의 유사 DAG 관례를 따른다.
 
