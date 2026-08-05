@@ -14,7 +14,7 @@ tools: Read, Bash, Grep, Glob
 ## 입력 계약
 - 대상 DAG 파일 경로
 - **모드**(진단 / 검증). 안 주어지면 검증으로 간주.
-- (검증) 원래 설계도/개선목록과 spec(적재/멱등성/백필/검증) — 의도대로 고쳐졌는지 대조용
+- (검증) 원래 설계도/개선목록 — 전 필드가 의도대로 반영됐는지 대조용(형식은 `.claude/context/dag-design-spec.md`)
 - (진단) 리팩터/수정의 목적(있으면). 없으면 일반 건강검진으로 전반 점검
 
 ## 먼저 Read (주입 컨텍스트)
@@ -27,7 +27,7 @@ tools: Read, Bash, Grep, Glob
 
 ## 점검 항목
 **Airflow 안티패턴 (파이프라인 특유 — 여기서 사고가 난다):**
-- `.claude/context/airflow-antipatterns.md`의 **전 항목을 이 DAG에 대해 하나씩 점검**한다. 위반은 심각도와 함께 지적한다. 특히 멱등성은 설계의 upsert/delete-then-insert가 코드에 실제로 구현됐는지 대조한다.
+- `.claude/context/airflow-antipatterns.md`의 **전 항목을 이 DAG에 대해 하나씩 점검**한다. 위반은 심각도와 함께 지적한다. 특히 멱등성은 설계도의 방식(기준은 `conventions/loading.md`)이 코드에 실제로 구현됐는지 대조한다.
 
 **일반 품질:**
 - 프로젝트 네이밍·폴더·Operator 컨벤션 준수

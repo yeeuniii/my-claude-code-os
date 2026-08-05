@@ -19,7 +19,7 @@ tools: Read, Write, Edit, Bash, Grep, Glob
 
 ## 입력 계약
 오케스트레이터가 다음을 준다:
-- **[신규] 설계도 파일 경로** — Read해서 dag_id·스케줄·task 그래프·spec(적재/멱등성/백필/검증)을 얻는다. 형식·경로 규칙은 `.claude/context/dag-design-spec.md` 기준.
+- **[신규] 설계도 파일 경로** — Read해서 task 그래프와 전 필드를 얻는다. 형식·경로 규칙은 `.claude/context/dag-design-spec.md` 기준.
 - **[수정·리팩터] 개선목록 파일 경로** — Read해서 합의된 진단 개선목록(항목별 문제·고칠 방향·동작 보존/변경)을 입력으로 삼는다.
 - (재검증 루프일 경우) 테스터/리뷰어가 돌려보낸 수정 요청
 
@@ -32,7 +32,7 @@ tools: Read, Write, Edit, Bash, Grep, Glob
 
 ## 구현 규칙
 - **설계도에 없는 것은 만들지 않는다.** 추가 task·옵션·"유연성"을 임의로 넣지 마라. 설계에 빈 곳이 있으면 코드에 `# TODO(확인 필요): ...`로 남기고 요약에 보고한다 — 조용히 추측해 채우지 마라.
-- **`.claude/context/airflow-antipatterns.md`의 전 항목을 범하지 않게 짠다.** 특히 멱등성은 설계의 방식(키 upsert / 파티션 delete-then-insert)을 실제 코드에 반영한다.
+- **`.claude/context/airflow-antipatterns.md`의 전 항목을 범하지 않게 짠다.** 특히 멱등성은 설계도의 방식(기준은 `conventions/loading.md`)을 실제 코드에 반영한다.
 - 스타일·주석 밀도는 주변 코드에 맞춘다.
 
 ## 출력
