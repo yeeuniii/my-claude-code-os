@@ -10,6 +10,8 @@
 - `owner`: 회사 닉네임
 - `retries`: 3, `retry_delay`: `timedelta(minutes=5)`.
 - `execution_timeout`: 필요에 따라(task 하나의 최대 실행시간).
+- task 안에서 외부 호출을 재시도하면 **그 예산이 `execution_timeout` 안에 들어오는지 계산해 둔다**:
+  `최대 시도 × 호출 타임아웃 + 대기 합`. 라이브러리 자체 재시도를 켜두면 우리 루프와 곱해진다.
 
 ## 알림
 - 이메일은 끈다: `email_on_failure=False`, `email_on_retry=False`(기본이 True). `email` 필드는 두지 않는다.

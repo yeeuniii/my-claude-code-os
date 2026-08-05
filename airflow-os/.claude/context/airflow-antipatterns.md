@@ -28,6 +28,18 @@
 ❌ `retries`·`execution_timeout` 없음, 광범위한 `depends_on_past`
 ✅ `default_args`에 `retries`·`retry_delay`·`execution_timeout` (기본 3 / 5m / 30m)
 
+## leaf 태스크가 실패를 삼킴
+❌ 유일한 leaf에 `trigger_rule=all_done`만 걸어두기 — DagRun 상태는 leaf로 정해지므로 상류 실패·전량 실패가 success로 끝난다
+✅ leaf가 "처리 대상이 있었는데 결과 0건" 같은 판정을 스스로 해서 실패시킨다
+
+## 매핑 결과를 위치로 잇기
+❌ 매핑 태스크 출력을 `list()`로 순회해 입력과 `zip` — skip·fail한 인스턴스는 XCom이 없어 인덱스가 밀리고, **다른 행에 결과가 붙는다**
+✅ 각 단계가 키를 담은 dict를 통째로 넘긴다. 굳이 위치로 이어야 하면 `map_indexes`를 명시해 당긴다(빈 자리가 `None`으로 남는다)
+
+## 매핑 단계 사이 trigger_rule
+❌ 매핑 태스크를 이어 붙이며 기본 `all_success` 두기 — 인스턴스 하나만 skip돼도 하류 단계가 **통째로** skip된다
+✅ 행별 실패를 허용할 거면 하류 매핑 단계에 `trigger_rule=all_done`
+
 ## 비밀·연결정보 하드코딩
 ❌ 접속정보·비밀번호·토큰을 코드에 박기
 ✅ Connection(비밀)·Variable(설정), 코드엔 키 이름만
