@@ -7,14 +7,15 @@ description: airflow-os 작업 회고를 `learnings/`에 남기는 스킬 — �
 
 파이프라인이 한 바퀴 돌 때마다 나온 **결정·트레이드오프·발견**을 축적해, 다음 작업이 같은 고민을 다시 하지 않게 하는 게 목적이다. 회고 자체가 목적이 아니라 **재사용**이 목적이다.
 
-## 두 종류의 회고
+## 회고의 종류
 
 | type             | 언제                        | 대상              |
 | ---------------- | ------------------------- | --------------- |
 | `task`           | DAG 작업 한 사이클(설계~승인)을 끝낸 뒤 | 그 DAG 작업의 결정·발견 |
 | `os-improvement` | 스킬·서브에이전트 구조 자체를 고친 뒤     | OS 메타 개선 이력     |
+| `experiment`     | OS가 실제로 효과가 있는지 측정한 뒤     | 설계·측정 방법과 결과    |
 
-둘 다 `airflow-os/learnings/`에 쌓는다. 종류는 파일명과 frontmatter로 구분한다.
+전부 `airflow-os/learnings/`에 쌓는다. 종류는 파일명과 frontmatter로 구분한다.
 
 ## 언제 쓰나
 - **작업 사이클(승인)을 끝낸 직후**: 오케스트레이터가 제안하거나 사용자가 요청하면 작성.
@@ -37,15 +38,16 @@ description: airflow-os 작업 회고를 `learnings/`에 남기는 스킬 — �
 - 폴더: `airflow-os/learnings/`
 - task: `learnings/<YYYY-MM-DD>-<dag_id>.md`
 - os-improvement: `learnings/<YYYY-MM-DD>-os-<주제>.md`
+- experiment: `learnings/<YYYY-MM-DD>-ab-<주제>.md`
 
 ## 템플릿
 
 ```markdown
 ---
-type: task | os-improvement
+type: task | os-improvement | experiment
 date: <YYYY-MM-DD>
 subject: <한 줄 제목>
-dag_id: <대상 DAG id — type이 task일 때만. os-improvement면 이 줄 생략>
+dag_id: <대상 DAG id — type이 task일 때만. 그 외에는 이 줄 생략>
 ---
 
 ## 무엇을

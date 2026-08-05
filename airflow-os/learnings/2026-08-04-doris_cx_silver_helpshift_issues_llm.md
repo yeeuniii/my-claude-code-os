@@ -2,9 +2,10 @@
 type: task
 date: 2026-08-04
 subject: 행별 LLM enrichment DAG 신규 구축 — 설계·구현·리뷰 4라운드
+dag_id: doris_cx_silver_helpshift_issues_llm
 ---
 
-> 이 파일은 공개 레포에 올라간다. 실제 DAG·테이블 이름과 업무 수치는 운영 레포 `docs/`의 설계도에 있다.
+> 이 파일은 공개 레포에 올라간다. 스키마·실측 수치·업무 협의 내용은 운영 레포 `designs/`의 설계도에 있다.
 
 ## 무엇을
 
