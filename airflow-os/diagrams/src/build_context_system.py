@@ -47,7 +47,7 @@ CARDS = {
     "test":  dict(col="workers", cy=398, title="dag-tester", sub="파싱·구조 검증"),
     "rev":   dict(col="workers", cy=478, title="dag-reviewer", sub="컨벤션·안티패턴·진단"),
     # 컨텍스트 (badges = 이걸 읽는 워커/스킬)
-    "spec":  dict(col="context", cy=222, title="dag-design-spec", sub="설계도 형식·필드",
+    "spec":  dict(col="context", cy=222, title="dag-design-spec", sub="설계도 형식·파일명",
                   badges="IBTR", cond="R"),
     "anti":  dict(col="context", cy=306, title="airflow-antipatterns", sub="top-level·멱등성 금지 패턴",
                   badges="IBR"),
@@ -55,7 +55,7 @@ CARDS = {
                   badges="BR"),
     "plat":  dict(col="context", cy=474, title="platform", sub="XCom backend · 계보",
                   badges="BR"),
-    "work":  dict(col="context", cy=558, title="workspace", sub="코드 위치 · 작업환경",
+    "work":  dict(col="context", cy=558, title="workspace", sub="코드·설계도 위치 · 작업환경",
                   badges="BT"),
     "conv":  dict(col="context", cy=650, h=88, title="conventions/  ×8",
                   sub="naming · loading · operators · schedule",
@@ -177,7 +177,7 @@ def build():
         '<span class="bdg cond">R</span>&nbsp;테두리 = 조건부 주입(검증 모드에서만)'
     ) % (PURPLE, SLATE)
     parts.append(f'<div class="legend">{legend}</div>')
-    parts.append('<div class="stamp">기준 2026-07-27 · .claude/ 로컬 자산 · 참조 관계 실측</div>')
+    parts.append('<div class="stamp">기준 2026-08-05 · .claude/ 로컬 자산 · 참조 관계 실측</div>')
 
     parts.append("</div></div>")
     return TEMPLATE.replace("__BODY__", "".join(parts))
