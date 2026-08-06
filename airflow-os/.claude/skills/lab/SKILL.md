@@ -40,6 +40,22 @@ bash .claude/skills/lab/scripts/verify.sh <DAG 파일|폴더>   # 2~3초
   - `Variable ... does not exist` / `conn_id ... isn't defined` → 아래 '더미 값 추가'
   - 그 외 → DAG 자체 버그. 코드 수정 대상으로 보고.
 
+## mapped task unmap 검증
+
+expand 를 쓰는 task 의 kwarg 는 파싱이 검증하지 않는다 — 검증이 unmap(런타임)으로 지연되므로,
+mapped task 가 있으면 파싱 후 unmap 을 실행해 본다. 태스크 실제 실행이 아니라 kwarg 바인딩 검증이라
+이 환경에서 된다:
+
+```python
+# .venv 파이썬으로 실행 — DagBag 로드 후 mapped task 를 unmap
+dag = DagBag(<폴더>).get_dag("<dag_id>")
+for t in dag.tasks:
+    if hasattr(t, "unmap"):
+        t.unmap(None)   # 잘못된 kwarg 면 여기서 TypeError
+```
+
+- **성공 기준: unmap TypeError 0건.**
+
 ## 패키지 추가
 
 ```bash
@@ -63,4 +79,4 @@ DAG가 파싱 시점에 Variable/Connection을 조회하면 `local_variables.env
 ## 알려진 한계
 
 - 사내 라이브러리 `dough`를 import하는 DAG는 파싱 시점에 **운영 메타DB에 직접 접속**한다(dough 내장 db.cfg, env로 우회 불가). 사내망이 안 닿으면 해당 DAG는 로컬 파싱 불가 — 환경 문제가 아니므로 시간 쓰지 말 것.
-- 이 환경은 파싱·단위 테스트용. 태스크 실제 실행(통합 테스트)이 필요해지면 2단계 도커 환경을 별도 구축한다.
+- 이 환경은 파싱·단위 테스트용. 태스크 실제 실행(통합 테스트)이 필요해지면 2단계 도커 환경을 별도 구축한다. (mapped task unmap 검증은 실행이 아니라 kwarg 바인딩 검증이라 여기서 된다 — 위 소절.)

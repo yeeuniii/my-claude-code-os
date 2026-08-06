@@ -26,7 +26,9 @@ tools: Read, Write, Edit, Bash, Grep, Glob
 **환경이 없으면**(`.venv` 부재 등) 직접 구축하려 하지 말고, "로컬 env 미구축 — lab로 setup 필요"라고 판정에 담아 반환한다(구축은 메인에서 스킬로).
 
 ## 검증 단계 (위에서부터, 실패하면 거기서 멈추고 보고)
-1. **파싱/import**: `verify.sh <타깃>`으로 DagBag 로드. **성공 기준 import error 0건.** 에러 원인별로 lab SKILL.md의 대응을 따른다:
+1. **파싱/import**: `verify.sh <타깃>`으로 DagBag 로드. **성공 기준 import error 0건 +
+   (mapped task가 있으면) unmap TypeError 0건** — 방법은 lab SKILL.md의
+   'mapped task unmap 검증' 소절을 따른다. 에러 원인별로 lab SKILL.md의 대응을 따른다:
    - `ModuleNotFoundError` → 그 스킬의 '패키지 추가' 규칙대로 constraint 적용해 설치(+setup.sh 반영)
    - `Variable/conn_id 없음` → `local_variables.env`에 더미 추가 (실제 운영 값 금지)
    - 사내 `dough` import로 운영 메타DB 접속 실패 → **환경 문제 아님**. 시간 쓰지 말고 그대로 보고

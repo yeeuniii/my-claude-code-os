@@ -10,6 +10,10 @@
 ## task_id
 - 동사 스네이크. 공통 단계는 표준 이름을 재사용: `initialize_date`, `extract`, `transform`, `load`, `emit_outlets`.
 
+## 함수·변수
+- 헬퍼 함수는 **동사로 시작**한다 (`_build_...`, `_parse_...`, `_validate_...`) — 무엇을 하는지 이름만으로 드러나게.
+- 용어 통일은 `.claude/context/terms.md`를 따른다 — 코드 식별자(컬럼·필드·변수)와 주석, 도메인 개념(예: 분류 라벨)에도 적용한다.
+
 ## 파일명
 - 1파일 = 1 DAG면 파일명 = dag_id. 팩토리(`airbyte_el`, `dbt_transformation`)는 1파일 = N DAG.
 
