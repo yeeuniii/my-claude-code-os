@@ -14,4 +14,5 @@
 
 ## Asset(데이터셋) 스케줄
 - 시간이 아니라 source 데이터가 준비되면 트리거: `schedule=[<ASSET>]`.
+- 단, 발행 이벤트에 `partition_key`가 실리면 평면 `[<ASSET>]`은 물리지 않는다 — 파티션 timetable로 구독한다. 기준·진단은 `airflow-antipatterns.md`의 'asset 트리거' 항목.
 - dbt의 asset 스케줄은 팩토리가 처리한다.

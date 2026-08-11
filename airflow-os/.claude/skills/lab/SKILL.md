@@ -48,10 +48,12 @@ mapped task 가 있으면 파싱 후 unmap 을 실행해 본다. 태스크 실�
 
 ```python
 # .venv 파이썬으로 실행 — DagBag 로드 후 mapped task 를 unmap
+# 데코레이터 기반 mapped task 는 unmap(None) 이 안 된다 — SDK 가 mapped_kwargs["op_kwargs"] 를
+# 첨자 접근하므로, 해석된 kwargs 형태로 넘겨야 kwarg 바인딩까지 검증된다.
 dag = DagBag(<폴더>).get_dag("<dag_id>")
 for t in dag.tasks:
     if hasattr(t, "unmap"):
-        t.unmap(None)   # 잘못된 kwarg 면 여기서 TypeError
+        t.unmap({"op_kwargs": {<expand 인자명>: <샘플 값>}})   # 잘못된 kwarg 면 TypeError
 ```
 
 - **성공 기준: unmap TypeError 0건.**

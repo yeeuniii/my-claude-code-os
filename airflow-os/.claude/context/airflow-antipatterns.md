@@ -40,6 +40,10 @@
 ❌ 매핑 태스크를 이어 붙이며 기본 `all_success` 두기 — 인스턴스 하나만 skip돼도 하류 단계가 **통째로** skip된다
 ✅ 행별 실패를 허용할 거면 하류 매핑 단계에 `trigger_rule=all_done`
 
+## asset 트리거 — 이벤트 종류와 timetable 짝 안 맞춤
+❌ 상류가 partition_key를 실은 파티션 이벤트를 발행하는데 평면 `schedule=[Asset(...)]`로 구독 — 파티션 이벤트는 평면 컨슈머를 지나치고(`created_dagruns=[]`), 파티션 컨슈머는 pk 없는 이벤트에 반응하지 않는다. 어느 쪽이든 트리거 0건이 조용히 지속된다
+✅ 설계 때 발행 이벤트의 pk 유무를 확인하고(이벤트 payload의 `partition_key`), pk가 실리면 `PartitionedAssetTimetable(assets=..., default_partition_mapper=IdentityMapper())`로 구독. 트리거 안 될 땐 이벤트 존재 → `created_dagruns` → 컨슈머 `asset_expression` → `queuedEvents` 순으로 진단
+
 ## 비밀·연결정보 하드코딩
 ❌ 접속정보·비밀번호·토큰을 코드에 박기
 ✅ Connection(비밀)·Variable(설정), 코드엔 키 이름만
