@@ -31,4 +31,11 @@ uv pip install --python .venv/bin/python --constraint "${CONSTRAINT_URL}" \
 uv pip install --python .venv/bin/python --constraint "${CONSTRAINT_URL}" \
     apache-airflow-providers-openai apache-airflow-providers-mysql
 
+# doris fastlog 적재 DAG: S3(SeaweedFS) 접근
+uv pip install --python .venv/bin/python --constraint "${CONSTRAINT_URL}" boto3
+
+# fastlog ETL DAG: DockerOperator (ephemeral 컨테이너 실행)
+uv pip install --python .venv/bin/python --constraint "${CONSTRAINT_URL}" \
+    apache-airflow-providers-docker
+
 echo "── 완료. 패키지 추가는 SKILL.md의 '패키지 추가' 절 참고."
