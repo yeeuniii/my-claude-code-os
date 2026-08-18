@@ -43,6 +43,8 @@
 ## asset 트리거 — 이벤트 종류와 timetable 짝 안 맞춤
 ❌ 상류가 partition_key를 실은 파티션 이벤트를 발행하는데 평면 `schedule=[Asset(...)]`로 구독 — 파티션 이벤트는 평면 컨슈머를 지나치고(`created_dagruns=[]`), 파티션 컨슈머는 pk 없는 이벤트에 반응하지 않는다. 어느 쪽이든 트리거 0건이 조용히 지속된다
 ✅ 설계 때 발행 이벤트의 pk 유무를 확인하고(이벤트 payload의 `partition_key`), pk가 실리면 `PartitionedAssetTimetable(assets=..., default_partition_mapper=IdentityMapper())`로 구독. 트리거 안 될 땐 이벤트 존재 → `created_dagruns` → 컨슈머 `asset_expression` → `queuedEvents` 순으로 진단
+❌ 발행 쪽에서도 짝이 깨진다: outlets 선언 task가 `add_partitions` 호출 없이 성공 종료 — 평면(무파티션) 이벤트가 자동 발행돼 파티션 컨슈머는 무반응, 평면 컨슈머는 "발행할 게 없던 run"에도 오발 트리거된다
+✅ 발행할 파티션이 없으면 `AirflowSkipException`으로 skip — skip된 task는 어떤 이벤트도 내지 않는다. `add_partitions`로 pk를 실었으면 평면 이벤트는 함께 나가지 않는다
 
 ## 비밀·연결정보 하드코딩
 ❌ 접속정보·비밀번호·토큰을 코드에 박기

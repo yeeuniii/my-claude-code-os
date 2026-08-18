@@ -9,6 +9,7 @@
 
 ## task_id
 - 동사 스네이크. 공통 단계는 표준 이름을 재사용: `initialize_date`, `extract`, `transform`, `load`, `emit_outlets`.
+- `emit_outlets`는 **발행 전용 task**(데이터 작업 없이 fan-in 지점에서 asset 신호만 발행)의 이름이다. 적재 task가 outlets를 함께 선언하는 경우(적재 성공 = asset 갱신 신호, 또는 OM 계보용 outlet)는 별도 발행 task를 만들지 않고 `load*` 이름을 유지한다.
 
 ## 함수·변수
 - 헬퍼 함수는 **동사로 시작**한다 (`_build_...`, `_parse_...`, `_validate_...`) — 무엇을 하는지 이름만으로 드러나게.
