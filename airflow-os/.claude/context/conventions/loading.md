@@ -8,6 +8,13 @@
 - **executemany insert** (`MySqlHook.insert_rows`, 파라미터 바인딩): 런당 수백 행 이하. stream load가 오버킬인 소량 upsert.
 - **INSERT INTO SELECT / dbt**: 데이터가 이미 Doris 안에 있는 테이블 간 변환.
 
+## task 간 XCom 수단 (records vs DataFrame)
+
+행 수가 아니라 **XCom 페이로드 바이트**가 근거다. 백엔드 동작·환경 의존은 `platform.md`.
+
+- **records (`list[dict]`)**: 페이로드 약 1MB 이하(얇은 행 수백~수천). 메타DB JSON으로 충분, SFTP 의존 없음.
+- **DataFrame**: 수 MB 이상(수만 행·넓은 프레임). 메타DB 비대화 방지, parquet 압축·dtype 보존.
+
 ## 적재 방식 (멱등)
 - **upsert**: PK/UNIQUE KEY로 덮어쓰기. (Doris는 PK 테이블 stream load가 곧 upsert, MariaDB는 `insert_duplicatekey_update` = ON DUPLICATE KEY)
 - **delete-then-insert**: 대상 날짜/파티션을 지우고 다시(파티션 삭제 전 파일 존재 확인 = fail-open).

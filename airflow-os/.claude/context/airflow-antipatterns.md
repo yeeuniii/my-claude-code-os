@@ -21,8 +21,8 @@
 ✅ 기본 `catchup=False`, 과거는 수동 backfill로 범위 통제
 
 ## XCom 대용량 전달
-❌ XCom으로 수 MB+ 데이터 전달 (메타DB 부하)
-✅ 외부 스토리지(S3/파일/테이블)에 두고 XCom엔 포인터(경로·키)만
+❌ records(list/dict — 메타DB JSON 직행)로 수 MB+ 데이터 전달 (메타DB 부하)
+✅ 외부 스토리지(S3/파일/테이블)에 두고 XCom엔 포인터(경로·키)만 — DataFrame XCom은 백엔드가 이걸 자동으로 한다(`platform.md`). 수단 선택 기준은 `conventions/loading.md`
 
 ## 안정성 설정
 ❌ `retries`·`execution_timeout` 없음, 광범위한 `depends_on_past`

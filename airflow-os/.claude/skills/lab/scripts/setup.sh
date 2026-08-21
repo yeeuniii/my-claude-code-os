@@ -38,4 +38,8 @@ uv pip install --python .venv/bin/python --constraint "${CONSTRAINT_URL}" boto3
 uv pip install --python .venv/bin/python --constraint "${CONSTRAINT_URL}" \
     apache-airflow-providers-docker
 
+# 봇 활동 이벤트 배치 DAG: Mattermost PG 접근(PostgresHook)
+uv pip install --python .venv/bin/python --constraint "${CONSTRAINT_URL}" \
+    apache-airflow-providers-postgres
+
 echo "── 완료. 패키지 추가는 SKILL.md의 '패키지 추가' 절 참고."

@@ -22,5 +22,5 @@
 - 동적 id는 `[^A-Za-z0-9_.-]` → `_` 치환(`dbt_lib/utils.py`의 `safe()`). appid의 `.`은 `-`로.
 
 ## Connection
-- conn_id: 스네이크. 대체로 `_conn` 접미(`doris_conn`, `idb_conn`), 예외 있음(`airflow_api`, `ftp`).
-- Variable dict/list 값은 `Variable.get(key, deserialize_json=True, default_var=...)`.
+- conn_id: 스네이크. 대체로 `_conn` 접미(`doris_conn`, `idb_conn`), 예외 있음(`airflow_api`, `sftp`).
+- Variable dict/list 값은 `Variable.get(key, deserialize_json=True, default=...)` — `airflow.sdk.Variable` 기준. `default_var`는 Airflow 2 시그니처라 sdk에서 TypeError.
