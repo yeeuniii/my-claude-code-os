@@ -10,7 +10,7 @@ description: Airflow 로컬 테스트 환경(venv)을 구축·검증·유지보�
 
 버전은 운영 레포 `Dockerfile`의 베이스 이미지를 따르며, 실제 설치 값은 `scripts/setup.sh`의 `AIRFLOW_VERSION`·`PYTHON_VERSION`에 있다. **버전이 적힌 곳은 거기 한 곳이다** — 운영이 올라가면 그 두 값만 바꾸고 재구축한다.
 
-**철학: 최소 세팅 + 점진 추가.** 기본은 Airflow 코어뿐이고, provider·라이브러리·더미 Variable/Connection은 **작업하는 DAG가 필요로 할 때 그때그때 추가**한다. 운영 DAG 전체를 로컬에서 파싱 가능하게 만드는 것은 목표가 아니다.
+**철학: 최소 세팅 + 점진 추가.** 기본은 Airflow 코어이고, provider·라이브러리·더미 Variable/Connection은 **작업하는 DAG가 필요로 할 때 그때그때 추가**해 setup.sh에 누적한다. 운영 DAG 전체를 로컬에서 파싱 가능하게 만드는 것은 목표가 아니다.
 
 ## 환경 정보
 
@@ -21,7 +21,7 @@ description: Airflow 로컬 테스트 환경(venv)을 구축·검증·유지보�
 ## 구축 / 재구축
 
 ```bash
-bash .claude/skills/lab/scripts/setup.sh   # Airflow 코어만 설치
+bash .claude/skills/lab/scripts/setup.sh   # 코어 + setup.sh에 누적된 DAG별 패키지
 ```
 
 재구축은 `rm -rf .venv` 후 다시 실행. (재구축하면 그동안 추가한 패키지가 사라지므로, 추가한 패키지는 아래 '패키지 추가' 규칙대로 setup.sh에 기록해둘 것.)
@@ -68,7 +68,7 @@ uv pip install --python .venv/bin/python \
   <package>
 ```
 
-추가했으면 **setup.sh에도 한 줄 반영** (재구축 시 유실 방지).
+추가했으면 **setup.sh에도 한 줄 반영** (재구축 시 유실 방지). 공개 PyPI에 없는 사내 패키지(예: `dough`)는 setup.sh의 해당 설치 줄(사내 레지스트리 `--extra-index-url`)을 그대로 재실행한다.
 
 ## 더미 값 추가 (Variable / Connection)
 
@@ -80,5 +80,5 @@ DAG가 파싱 시점에 Variable/Connection을 조회하면 `local_variables.env
 
 ## 알려진 한계
 
-- 사내 라이브러리 `dough`를 import하는 DAG는 파싱 시점에 **운영 메타DB에 직접 접속**한다(dough 내장 db.cfg, env로 우회 불가). 사내망이 안 닿으면 해당 DAG는 로컬 파싱 불가 — 환경 문제가 아니므로 시간 쓰지 말 것.
+- 사내 라이브러리 `dough`는 사내 PyPI 레지스트리에서 설치된다(setup.sh에 반영됨). 다만 **파싱 시점에** dough로 운영 메타DB를 조회하는 DAG(앱 목록으로 fan-out을 정하는 유형)는 사내망이 닿아야 파싱된다(dough 내장 db.cfg, env로 우회 불가) — 안 닿으면 환경 문제가 아니므로 시간 쓰지 말 것. task 안에서만 dough를 쓰는 DAG는 사내망 없이도 파싱된다.
 - 이 환경은 파싱·단위 테스트용. 태스크 실제 실행(통합 테스트)이 필요해지면 2단계 도커 환경을 별도 구축한다. (mapped task unmap 검증은 실행이 아니라 kwarg 바인딩 검증이라 여기서 된다 — 위 소절.)

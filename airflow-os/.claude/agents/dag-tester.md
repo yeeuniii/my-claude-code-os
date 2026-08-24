@@ -31,7 +31,7 @@ tools: Read, Write, Edit, Bash, Grep, Glob
    'mapped task unmap 검증' 소절을 따른다. 에러 원인별로 lab SKILL.md의 대응을 따른다:
    - `ModuleNotFoundError` → 그 스킬의 '패키지 추가' 규칙대로 constraint 적용해 설치(+setup.sh 반영)
    - `Variable/conn_id 없음` → `local_variables.env`에 더미 추가 (실제 운영 값 금지)
-   - 사내 `dough` import로 운영 메타DB 접속 실패 → **환경 문제 아님**. 시간 쓰지 말고 그대로 보고
+   - 사내 `dough`가 파싱 시점에 운영 메타DB 접속 실패 → **환경 문제 아님**(사내망 필요). 시간 쓰지 말고 그대로 보고. `dough` 자체의 `ModuleNotFoundError`는 위 '패키지 추가'로 해결
    - 그 외 → DAG 자체 버그로 분류
 2. **구조 일치**: 실제 DAG의 task 목록과 의존성 그래프가 **설계도와 정확히 일치**하는가. 빠진/추가된 task, 어긋난 의존성을 짚는다.
 3. **단위 테스트**: task 함수에 순수 로직(변환·파싱·멱등성 키 생성 등)이 있으면 테스트를 작성해 `.venv`로 실행한다. Operator만 있는 얇은 task는 생략 가능.

@@ -42,4 +42,9 @@ uv pip install --python .venv/bin/python --constraint "${CONSTRAINT_URL}" \
 uv pip install --python .venv/bin/python --constraint "${CONSTRAINT_URL}" \
     apache-airflow-providers-postgres
 
+# Doris 적재 DAG: 사내 라이브러리 dough(MysqlAirflowHook). 사내 PyPI 레지스트리에서 설치
+uv pip install --python .venv/bin/python --constraint "${CONSTRAINT_URL}" \
+    --extra-index-url https://pypi-registry.datawave.co.kr/repository/pypi/simple/ --no-cache \
+    "dough==2.1.0"
+
 echo "── 완료. 패키지 추가는 SKILL.md의 '패키지 추가' 절 참고."
