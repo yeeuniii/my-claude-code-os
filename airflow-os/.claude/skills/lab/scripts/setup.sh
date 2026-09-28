@@ -34,6 +34,9 @@ uv pip install --python .venv/bin/python --constraint "${CONSTRAINT_URL}" \
 # doris fastlog 적재 DAG: S3(SeaweedFS) 접근
 uv pip install --python .venv/bin/python --constraint "${CONSTRAINT_URL}" boto3
 
+# 데이터 검증 알림 DAG: 공휴일 판정
+uv pip install --python .venv/bin/python --constraint "${CONSTRAINT_URL}" holidays
+
 # fastlog ETL DAG: DockerOperator (ephemeral 컨테이너 실행)
 uv pip install --python .venv/bin/python --constraint "${CONSTRAINT_URL}" \
     apache-airflow-providers-docker
@@ -46,5 +49,9 @@ uv pip install --python .venv/bin/python --constraint "${CONSTRAINT_URL}" \
 uv pip install --python .venv/bin/python --constraint "${CONSTRAINT_URL}" \
     --extra-index-url https://pypi-registry.datawave.co.kr/repository/pypi/simple/ --no-cache \
     "dough==2.1.0"
+
+# OM lineage reset transport(plugins/): openlineage provider·클라이언트. 운영 Dockerfile이 constraint 없이 설치하므로 동일하게 핀
+uv pip install --python .venv/bin/python \
+    "apache-airflow-providers-openlineage==2.20.1" "openlineage-python==1.52.0"
 
 echo "── 완료. 패키지 추가는 SKILL.md의 '패키지 추가' 절 참고."
