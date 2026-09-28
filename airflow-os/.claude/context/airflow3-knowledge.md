@@ -2,6 +2,11 @@
 
 > Airflow 3.x 기준. 버전 올릴 때 이 파일을 갱신한다.
 
+## 버전 기준
+- 운영 버전의 단일 출처는 운영 레포 `Dockerfile`의 베이스 이미지 태그다. 버전에 따라 결론이 갈리는 판단(API 필드·SDK 기능 유무 등) 전에 여기서 확인한다.
+- 코드 주석·독스트링·learnings에 적힌 버전은 작성 당시 값이다. 판단 근거로 쓰지 않는다.
+- 로컬 버전은 `airflow-os/.venv`에서 `airflow.__version__`을 직접 확인한다. 추정으로 단정하지 않는다.
+
 ## 진입점 · import 경로
 - TaskFlow·Asset 등 진입점은 `airflow.sdk`에서: `from airflow.sdk import dag, task, Asset, ...`.
 - 대체된 import(구 → 신):

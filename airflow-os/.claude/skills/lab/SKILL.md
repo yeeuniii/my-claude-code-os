@@ -8,7 +8,7 @@ description: Airflow 로컬 테스트 환경(venv)을 구축·검증·유지보�
 **운영 서버와 동일 버전**의 Airflow 로컬 venv 환경.
 도커 없이 DAG 파싱 검증·pytest 단위 테스트까지 커버한다.
 
-버전은 운영 레포 `Dockerfile`의 베이스 이미지를 따르며, 실제 설치 값은 `scripts/setup.sh`의 `AIRFLOW_VERSION`·`PYTHON_VERSION`에 있다. **버전이 적힌 곳은 거기 한 곳이다** — 운영이 올라가면 그 두 값만 바꾸고 재구축한다.
+버전은 운영 레포 `Dockerfile`의 베이스 이미지를 따르며, 설치할 값은 `scripts/setup.sh`의 `AIRFLOW_VERSION`·`PYTHON_VERSION`에 있다. **OS 안에서 버전이 적힌 곳은 거기 한 곳이다** — 운영이 올라가면 그 두 값만 바꾸고 재구축한다.
 
 **철학: 최소 세팅 + 점진 추가.** 기본은 Airflow 코어이고, provider·라이브러리·더미 Variable/Connection은 **작업하는 DAG가 필요로 할 때 그때그때 추가**해 setup.sh에 누적한다. 운영 DAG 전체를 로컬에서 파싱 가능하게 만드는 것은 목표가 아니다.
 
